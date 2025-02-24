@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HomeBrew</string>
+    <string name="hello">\"Hello Adil\"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="fragment_one">Fragment One</string>
+    <string name="fragment_two">Fragment Two\n</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+</resources>

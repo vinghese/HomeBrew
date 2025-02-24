@@ -1,0 +1,125 @@
+package edu.ddukk.homebrew.DAO
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
+import edu.ddukk.homebrew.data.Break
+import edu.ddukk.homebrew.data.Instructor
+import edu.ddukk.homebrew.data.Subject
+import edu.ddukk.homebrew.data.Timetable
+
+@Dao
+interface TimetableDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTimetable(timetable: Timetable)
+
+    @Update
+    suspend fun updateTimetable(timetable: Timetable)
+
+    @Delete
+    suspend fun deleteTimetable(timetable: Timetable)
+
+    @Query("SELECT * FROM timetable WHERE day_of_week = :day ORDER BY period")
+    suspend fun getTimetableForDay(day: String): List<Timetable>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSubject(subject: Subject)
+
+    @Query("SELECT * FROM subjects")
+    suspend fun getAllSubjects(): List<Subject>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertInstructor(instructor: Instructor)
+
+    @Query("SELECT * FROM instructors")
+    suspend fun getAllInstructors(): List<Instructor>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertBreak(breakInfo: Break)
+
+    @Query("SELECT * FROM breaks")
+    suspend fun getAllBreaks(): List<Break>
+
+    @Transaction
+    @Query("""
+        SELECT timetable.* 
+        FROM timetable
+        INNER JOIN subjects ON timetable.subject_id = subjects.subject_id
+        WHERE subjects.subject_name = :subjectName
+        ORDER BY timetable.day_of_week, timetable.period
+    """)
+    suspend fun getTimetableForSubject(subjectName: String): List<Timetable>
+
+    @Transaction
+    @Query("""
+        SELECT timetable.* 
+        FROM timetable
+        INNER JOIN instructors ON timetable.instructor_id = instructors.instructor_id
+        WHERE instructors.instructor_name = :instructorName
+        ORDER BY timetable.day_of_week, timetable.period
+    """)
+    suspend fun getTimetableForInstructor(instructorName: String): List<Timetable>
+}
+
+@Dao
+interface SubjectDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSubject(subject: Subject)
+
+    @Query("SELECT * FROM subjects")
+    suspend fun getAllSubjects(): List<Subject>
+}
+
+@Dao
+interface InstructorDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertInstructor(instructor: Instructor)
+
+    @Query("SELECT * FROM instructors")
+    suspend fun getAllInstructors(): List<Instructor>
+}
+
+@Dao
+interface BreakDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertBreak(breakInfo: Break)
+
+    @Query("SELECT * FROM breaks")
+    suspend fun getAllBreaks(): List<Break>
+}
+
+@Dao
+interface DayOfWeekDao {
+    @Query("SELECT * FROM timetable WHERE day_of_week = :day ORDER BY period")
+    suspend fun getTimetableForDay(day: String): List<Timetable>
+}
+
+@Dao
+interface SubjectNameDao {
+    @Transaction
+    @Query("""
+        SELECT timetable.* 
+        FROM timetable
+        INNER JOIN subjects ON timetable.subject_id = subjects.subject_id
+        WHERE subjects.subject_name = :subjectName
+        ORDER BY timetable.day_of_week, timetable.period
+    """)
+    suspend fun getTimetableForSubject(subjectName: String): List<Timetable>
+}
+
+@Dao
+interface InstructorNameDao {
+    @Transaction
+    @Query("""
+        SELECT timetable.* 
+        FROM timetable
+        INNER JOIN instructors ON timetable.instructor_id = instructors.instructor_id
+        WHERE instructors.instructor_name = :instructorName
+        ORDER BY timetable.day_of_week, timetable.period
+    """)
+    suspend fun getTimetableForInstructor(instructorName: String): List<Timetable>
+}

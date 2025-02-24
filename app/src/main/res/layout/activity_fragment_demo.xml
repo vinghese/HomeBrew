@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ddukk.homebrew.FragmentDemoActivity">
+
+    <Button
+        android:id="@+id/btnShowFragmentOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Fragment One"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <Button
+        android:id="@+id/btnShowFragmentTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Fragment Two"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_demo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

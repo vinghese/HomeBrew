@@ -1,0 +1,10 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE `timetable` (`table_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0, `day_of_week` TEXT NOT NULL DEFAULT 'MoN', `start_time` TEXT NOT NULL DEFAULT '09:00 AM', `end_time` TEXT NOT NULL DEFAULT '05:00 PM', `period` TEXT NOT NULL DEFAULT '11111', `programs_id` INTEGER NOT NULL DEFAULT 1, `semester_id` INTEGER NOT NULL DEFAULT 1, `subject_id` INTEGER NOT NULL DEFAULT 1, `instructor_id` INTEGER NOT NULL DEFAULT 1, `break_id` INTEGER DEFAULT 0, FOREIGN KEY(`subject_id`) REFERENCES `subjects`(`subject_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`instructor_id`) REFERENCES `instructors`(`instructor_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`break_id`) REFERENCES `breaks`(`break_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`programs_id`) REFERENCES `programs`(`programs_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`semester_id`) REFERENCES `semesters`(`semester_id`) ON UPDATE NO ACTION ON DELETE SET NULL );
+INSERT INTO timetable VALUES(1,'Monday','9.00 AM','10.00 AM','1',1,3,3,1,1);
+INSERT INTO timetable VALUES(2,'Monday','10:00 AM','11.00 AM','2',1,3,3,1,1);
+INSERT INTO timetable VALUES(3,'Monday','11:00 AM','12.00 PM','3',1,3,2,1,1);
+INSERT INTO timetable VALUES(4,'Monday','12:00 PM','01.00 PM','4',1,3,2,1,3);
+INSERT INTO timetable VALUES(5,'Monday','02:00 PM','03:00 PM','5',1,2,2,2,1);
+INSERT INTO timetable VALUES(6,'Monday','03:00 PM','04.00 PM','5',1,2,2,2,1);
+COMMIT;

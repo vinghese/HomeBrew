@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Test"
+        tools:targetApi="31">
+        <service android:name=".services.MyService"></service>
+
+        <activity
+            android:name=".ServiceDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".veiwpager.ViewPagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".room.RoomMongoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".room.RoomNoteActivity"
+            android:exported="true" />
+        <activity
+            android:name=".recyclerview.RecycerViewDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".adapters.ArrayAdapterDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".fragment.FragmentDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".notification.NotificationDemoActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
